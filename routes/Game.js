@@ -37,7 +37,7 @@ module.exports = class Game {
       roundData[player] = guess;
       roundData['round'] = this.round;
       this.guessHistory.push(roundData);
-      return 'waiting for other player';
+      return 'waiting for other player to submit guess';
     } else {
       this.guessHistory[this.round - 1][player] = guess;
       return this.evaluate();

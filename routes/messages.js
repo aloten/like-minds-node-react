@@ -19,20 +19,21 @@ router.post('/newPlayer', async (req, res) => {
   try {
     const result = await game.newPlayer(player);
     const status = await game.getStatus();
-    res.json({status, result});
+    res.status(201);
+    res.json({ status, result });
   } catch (error) {
     res.status(500).send();
   }
 });
 
-router.get('/getPlayers', async(req, res) => {
+router.get('/getPlayers', async (req, res) => {
   try {
     const players = await game.getPlayers();
-    res.json(players)
+    res.json(players);
   } catch (error) {
     res.status(500);
   }
-})
+});
 
 router.post('/newGuess', async (req, res) => {
   const player = req.body.player;
