@@ -8,6 +8,6 @@ app.use(cors());
 app.use(express.json({ extended: false }));
 
 // Define routes
-app.use('/', require('./routes/messages'));
+app.use('/', require('./routes/router'));
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

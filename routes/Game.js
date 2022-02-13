@@ -1,22 +1,23 @@
 module.exports = class Game {
   constructor() {
-    this.status = 'pregame';
+    this.gameStatus = 0;
     this.round = 1;
     this.players = [];
     this.guessHistory = [];
   }
 
-  getStatus() {
-    return this.status;
+  getGameStatus() {
+    return this.gameStatus;
   }
 
   newPlayer(player) {
     if (this.players.length == 0) {
       this.players.push(player);
+      this.gameStatus = 1;
       return `${player} added to the game`;
-    } else {
+    } else if (this.players.length == 1) {
       this.players.push(player);
-      this.status = 'running game';
+      this.gameStatus = 2;
       return `${player} added to the game`;
     }
   }
@@ -50,7 +51,8 @@ module.exports = class Game {
       roundData[player] = guess;
       roundData['round'] = this.round;
       this.guessHistory.push(roundData);
-      return 'waiting for other player to submit guess';
+      this.gameStatus = 3;
+      return guess;
     } else {
       this.guessHistory[this.round - 1][player] = guess;
       return this.evaluate();
@@ -64,10 +66,11 @@ module.exports = class Game {
     const guess1 = guesses[this.players[0]];
     const guess2 = guesses[this.players[1]];
     if (guess1.toLowerCase() == guess2.toLowerCase()) {
-      this.status = 'game over';
+      this.gameStatus = 5;
       return 'match';
     } else {
       this.round++;
+      this.gameStatus = 4;
       return 'no match';
     }
   }
