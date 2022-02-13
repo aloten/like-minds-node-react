@@ -3,15 +3,25 @@ const router = express.Router();
 
 const Game = require('./Game');
 
-const game = new Game();
+let game = new Game();
 
 router.get('/', (req, res) => {
   res.json('Run some of our routes!');
 });
 
+router.get('/burnGame', (req, res) => {
+  game = new Game();
+  res.json('Game burned');
+});
+
 router.get('/guessHistory', async (req, res) => {
   const guessHistory = await game.getGuessHistory();
   res.json(guessHistory);
+});
+
+router.get('/currentRound', async (req, res) => {
+  const currentRound = await game.getCurrentRound();
+  res.json(currentRound);
 });
 
 router.post('/newPlayer', async (req, res) => {
