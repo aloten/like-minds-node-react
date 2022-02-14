@@ -29,11 +29,11 @@ const ChatGuess = ({ onGuessSubmit }) => {
         disabled={gameStatus == 3 || gameStatus == 5}
       />
       <button
-        className='btn btn-success'
+        className='btn btn-success submit-guess-btn'
         type='submit'
         disabled={gameStatus == 3 || gameStatus == 5}
       >
-        Submit guess
+        Submit
       </button>
     </form>
   );

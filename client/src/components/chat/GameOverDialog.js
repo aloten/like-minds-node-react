@@ -1,7 +1,10 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
+import PlayerContext from '../../context/playerContext';
+import Party from '../../misc/Party';
+
 // styling credit: https://github.com/thefaiz/react-dialog/blob/master/src/components/Dialog.js
 let dialogStyles = {
-  width: '500px',
+  width: '300px',
   maxWidth: '100%',
   margin: '0 auto',
   position: 'fixed',
@@ -29,7 +32,14 @@ let dialogCloseButtonStyles = {
 };
 
 const GameOverDialog = () => {
+  const playerContext = useContext(PlayerContext);
+  const { restartGame } = playerContext;
   const [isOpen, setIsOpen] = useState(true);
+
+  const onRestartClick = () => {
+    restartGame();
+    window.location.reload();
+  };
 
   const onClose = () => {
     setIsOpen(false);
@@ -40,7 +50,12 @@ const GameOverDialog = () => {
       <button style={dialogCloseButtonStyles} onClick={onClose}>
         x
       </button>
-      <div>You won!!!!</div>
+      <div className='game-over-dialog-content'>
+        <Party />
+        <button className='btn btn-danger restart-btn' onClick={onRestartClick}>
+          Restart game
+        </button>
+      </div>
     </div>
   );
 

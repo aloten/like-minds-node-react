@@ -19,7 +19,7 @@ const ChatWindow = () => {
     getPlayers();
   }, []);
 
-  const loading = <span>waiting for other player to join game...</span>;
+  const loading = <span className='loading-message'>waiting for other player to join game...</span>;
 
   const chatMessages = (
     <div className='chatWindow'>
@@ -46,10 +46,10 @@ const ChatWindow = () => {
   );
 
   return (
-    <Fragment>
+    <div className='chat-window-container'>
       {gameStatus == 1 ? loading : chatMessages}
       {gameStatus === 5 && <GameOverDialog />}
-    </Fragment>
+    </div>
   );
 };
 

@@ -1,27 +1,9 @@
-import { useContext } from 'react';
-import PlayerContext from '../../context/playerContext';
-import { useNavigate } from 'react-router-dom';
-
-const PlayerForm = () => {
-  const playerContext = useContext(PlayerContext);
-  const { newPlayer } = playerContext;
-
-  let navigate = useNavigate();
-
-  const onSubmitPlayer = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const player = form.player.value;
-    await newPlayer(player);
-    navigate('/game');
-  };
-
+const PlayerForm = ({onSubmitPlayer}) => {
   return (
     <div className='playerFormContainer'>
       <form onSubmit={onSubmitPlayer}>
-        <span>Please enter your name: </span>
-        <input type='text' placeholder='name' name='player' />
-        <button className='btn' type='submit'>Start game</button>
+        <input type='text' placeholder='username' name='player' />
+        <button className='btn submit-player-btn' type='submit'>Join lobby</button>
       </form>
     </div>
   );
