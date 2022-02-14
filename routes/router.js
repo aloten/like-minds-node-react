@@ -5,10 +5,6 @@ const Game = require('./Game');
 
 let game = new Game();
 
-router.get('/', (req, res) => {
-  res.json('Run some of our routes!');
-});
-
 // Reset game state on Node server
 router.get('/restartGame', (req, res) => {
   game = new Game();
